@@ -9,6 +9,7 @@ class BotManager {
     this.currencies = [...new Set(coinSettings.map(item => item.currency))];
     this.tradeTypes = ['buy', 'sell'];
     this.types = ['limit', 'stop_limit'];
+    this.stopCondition = ['ge', 'le'];
     let avgPrices = {
       'btc': 5165000,
       'bch': 286500,
@@ -24,6 +25,7 @@ class BotManager {
     this.prices = [];
     this.minPriceRatio = 0.75;
     this.maxPriceRatio = 1.25;
+    this.minBasePriceRatio = 0.8;
     this.createPrices(avgPrices, 'krw');
     this.createPrices(avgPrices, 'btc', avgPrices['btc']);
     this.createPrices(avgPrices, 'eth', avgPrices['eth']);
@@ -47,6 +49,7 @@ class BotManager {
       let password = i < 10 ? '123123' : '1231234';
       let api = new Api();
       let order = this.getOrderRandom(coinSettings);
+      console.log(order);
       api.createOrder({username: email, password: password}, order);
     }, 3000);
   }
@@ -61,16 +64,21 @@ class BotManager {
     let pair = `${coin}_${currency}`;
     let price = parseFloat(randomFloat(this.prices[pair].minPrice, this.prices[pair].maxPrice)).toFixed(precision);
     let quantity = this.randomQuantity(coin, currency, pairInfo.minimum_quantity);
-
-    return {
+    let order = {
       coin: coin,
       currency: currency,
       type: type,
       tradeType: tradeType,
       ioc: 1,
       price: price,
-      quantity: quantity
+      quantity: quantity,
+    };
+    if (type === 'stop_limit' || type === 'stop_market') {
+      let stopCondition = this.stopCondition[random.integer(0, 1)];
+      let basePrice = parseFloat(price * this.minBasePriceRatio).toFixed(precision);
+      order = Object.assign(order, {base_price: basePrice, stop_condition: stopCondition})
     }
+    return order;
   }
 
   randomQuantity(coin, currency, minimumQuantity) {
