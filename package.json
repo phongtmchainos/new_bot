@@ -1,0 +1,17 @@
+{
+  "name": "cerei_order_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "file-system": "^2.2.2",
+    "random-float": "^1.0.0",
+    "random-js": "^1.0.8"
+  }
+}
