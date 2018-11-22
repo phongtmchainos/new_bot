@@ -42,10 +42,8 @@ class Api {
         "Authorization": "Bearer " + this.accessToken
       }
     };
-    console.log(this.accessToken, this.order);
-
     await axios.post(url, this.order, config).then(res => {
-      console.log('success');
+      console.log('order success', res.data);
     }).catch(err => {
       console.log(err.message);
     });

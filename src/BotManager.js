@@ -4,7 +4,7 @@ var randomFloat = require('random-float');
 
 class BotManager {
   constructor() {
-    this.coins = ['btc', 'eth', 'bch', 'xrp', 'ltc', 'etc', 'dash', 'neo', 'qtumn'];
+    this.coins = ['btc', 'eth', 'bch', 'xrp', 'ltc', 'etc', 'dash', 'neo', 'qtum'];
     this.currencies = ['krw', 'usdt', 'btc', 'eth'];
     this.tradeTypes = ['buy', 'sell'];
     this.types = ['limit', 'stop_limit'];
