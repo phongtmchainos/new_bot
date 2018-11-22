@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../cerei_order_bot/.idea/cerei__order_bot.iml" filepath="$PROJECT_DIR$/../cerei_order_bot/.idea/cerei__order_bot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/new_bot.iml" filepath="$PROJECT_DIR$/.idea/new_bot.iml" />
     </modules>
   </component>
 </project>
