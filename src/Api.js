@@ -1,10 +1,11 @@
 const axios = require('axios').default;
+var random = require("random-js")();
 
 class Api {
   constructor(email, password, order) {
-    this.appServer = 'http://13.125.236.184';
-    this.clientId = 1;
-    this.clientSecret = 'ZyukJCTBiOdb5j96ahz86mcy2USDFtZoSfRYs1oR';
+    this.appServer = 'http://localhost:8000';
+    this.clientId = 3;
+    this.clientSecret = 'wrTCVZxB3NtSpcNXLj3dgn54oPDNedt9kGlHu54b';
     this.email = email;
     this.password = password;
     this.order = order;
@@ -42,11 +43,24 @@ class Api {
         "Authorization": "Bearer " + this.accessToken
       }
     };
-    await axios.post(url, this.order, config).then(res => {
-      console.log('order success', res.data);
+    let orderInfo = await this.orderInfo(this.order.trade_type, this.order.coin);
+    await axios.post(url, Object.assign(this.order, orderInfo), config).then(res => {
+      console.log(this.order);
     }).catch(err => {
       console.log(err.message);
     });
+  }
+
+  async orderInfo(tradeType, coin) {
+    let url = ` https://api.bithumb.com/public/orderbook/${coin}`;
+    let res = await axios.get(url);
+    let data = [];
+    if (tradeType === 'buy') {
+      data = res.data.data.bids;
+    } else {
+      data = res.data.data.asks;
+    }
+    return data[random.integer(0, data.length - 1)];
   }
 }
 
