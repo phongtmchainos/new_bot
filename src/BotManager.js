@@ -1,6 +1,5 @@
 var Api = require('./Api');
 var random = require("random-js")();
-var randomFloat = require('random-float');
 
 class BotManager {
   constructor() {

@@ -4,11 +4,22 @@ var random = require("random-js")();
 class Api {
   constructor(email, password, order) {
     this.appServer = 'http://localhost:8000';
-    this.clientId = 3;
-    this.clientSecret = 'wrTCVZxB3NtSpcNXLj3dgn54oPDNedt9kGlHu54b';
+    this.clientId = 4;
+    this.clientSecret = 'QG0A1oUCohDtNdFMj7BaHeafq2B5fLe2KYmZ4Zid';
     this.email = email;
     this.password = password;
     this.order = order;
+    this.minQuantities = {
+      btc: 0.0001,
+      eth: 0.001,
+      bch: 0.001,
+      xrp: 1,
+      ltc: 0.001,
+      etc: 0.001,
+      dash: 0.0001,
+      neo: 0.0005,
+      qtum: 0.00005
+    };
     this.run();
   }
 
@@ -60,7 +71,23 @@ class Api {
     } else {
       data = res.data.data.asks;
     }
-    return data[random.integer(0, data.length - 1)];
+    return {
+      price: data[random.integer(0, data.length - 1)].price,
+      quantity: this.calulateQuantity(data[random.integer(0, data.length - 1)].quantity, coin)
+    };
+  }
+
+  calulateQuantity(amount, coin) {
+    let minQuantity = this.minQuantities[coin] || 0.1;
+    let quantity = amount;
+    if (quantity > 200 * minQuantity) {
+      quantity = quantity / 200;
+    }
+    if (coin === 'xrp') {
+      quantity = quantity / 20;
+    }
+    quantity = Math.round(quantity / minQuantity) * minQuantity;
+    return Math.max(quantity, minQuantity);
   }
 }
 
