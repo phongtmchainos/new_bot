@@ -3,7 +3,7 @@ var random = require("random-js")();
 
 class BotManager {
   constructor() {
-    this.coins = ['btc', 'eth', 'bch', 'xrp', 'ltc', 'etc', 'dash', 'neo', 'qtum'];
+    this.coins = ['btc', 'eth', 'dash', 'eos', 'bltg'];
     this.runBots();
   }
 

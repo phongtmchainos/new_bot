@@ -3,9 +3,9 @@ var random = require("random-js")();
 
 class Api {
   constructor(email, password, order) {
-    this.appServer = 'http://localhost:8000';
-    this.clientId = 4;
-    this.clientSecret = 'QG0A1oUCohDtNdFMj7BaHeafq2B5fLe2KYmZ4Zid';
+    this.appServer = 'http://3.1.27.64/';
+    this.clientId = 2;
+    this.clientSecret = 'j2ZccqD1G2BArGYMzbgyO8D4RY3KBYmteXpbeKPj';
     this.email = email;
     this.password = password;
     this.order = order;
@@ -82,9 +82,6 @@ class Api {
     let quantity = amount;
     if (quantity > 200 * minQuantity) {
       quantity = quantity / 200;
-    }
-    if (coin === 'xrp') {
-      quantity = quantity / 20;
     }
     quantity = Math.round(quantity / minQuantity) * minQuantity;
     return Math.max(quantity, minQuantity);
