@@ -4,22 +4,19 @@ var randomFloat = require('random-float');
 
 class BotManager {
   constructor() {
-    this.coins = ['btc', 'eth', 'bch', 'xrp', 'ltc', 'etc', 'dash', 'neo', 'qtum'];
-    this.currencies = ['krw', 'usdt', 'btc', 'eth'];
+    this.coins = ['btc', 'eth', 'bltg', 'toma', 'dash', 'eos', 'pivx'];
+    this.currencies = ['krw', 'btc', 'eth'];
     this.tradeTypes = ['buy', 'sell'];
-    this.types = ['limit', 'stop_limit'];
+    this.types = ['limit'];
     this.stopCondition = ['ge', 'le'];
     let avgPrices = {
-      'btc': 5222000,
-      'bch': 51413,
-      'etc': 12012,
-      'eth': 350034,
-      'ltc': 293000 ,
-      'xrp': 206,
-      'dash': 9758,
-      'neo': 10500,
-      'qtum': 2740,
-      'usdt': 1115
+      'btc': 4492000,
+      'eth': 153500,
+      'bltg': 35.5,
+      'toma': 20 ,
+      'dash': 101,
+      'eos': 4100,
+      'pivx': 918.5
     };
     this.prices = [];
     this.minPriceRatio = 0.75;
@@ -28,7 +25,6 @@ class BotManager {
     this.createPrices(avgPrices, 'krw');
     this.createPrices(avgPrices, 'btc', avgPrices['btc']);
     this.createPrices(avgPrices, 'eth', avgPrices['eth']);
-    this.createPrices(avgPrices, 'usdt', avgPrices['usdt']);
     this.runBots();
   }
 
@@ -62,7 +58,6 @@ class BotManager {
     let pair = `${coin}_${currency}`;
     let precision = 0;
     switch (currency) {
-      case 'usdt': precision = 3; break;
       case 'btc': precision = 8; break;
       case 'eth': precision = 8; break;
       default: precision = 0;
@@ -77,7 +72,7 @@ class BotManager {
     let quantity = 0;
     if (coin === 'btc') {
       quantity = parseFloat(randomFloat(0.01, 5)).toFixed(2);
-    } else if (currency === 'krw' && (coin === 'dash' || coin === 'xrp')) {
+    } else if (currency === 'krw' && (coin === 'dash')) {
       quantity = random.integer(200, 10000);
     } else {
       quantity = random.integer(1, 100);
