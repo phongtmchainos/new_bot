@@ -2,9 +2,9 @@ const axios = require('axios').default;
 
 class Api {
   constructor(email, password, order) {
-    this.appServer = 'https://trade.tomaexchange.com';
+    this.appServer = 'http://45.32.102.24';
     this.clientId = 2;
-    this.clientSecret = 'ilHhcfQ6mPDHopHIVtyWkInTgwsbuzVGIedJbx9B';
+    this.clientSecret = 'ddKlF9b2sBnKPyD70DMXRGPLnGApLcI60b4fhh6p';
     this.email = email;
     this.password = password;
     this.order = order;
