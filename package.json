@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "file-system": "^2.2.2",
     "random-float": "^1.0.0",
     "random-js": "^1.0.8"
